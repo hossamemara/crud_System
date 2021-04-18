@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD System</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <!--________________ CRUD System Inputs Section Start ________________-->
+    <div class="crudInputs w-75 m-auto" id="crud">
+        <h1 class="text-center text-danger  my-5">CRUD System</h1>
+        <div class="form-group">
+            <label for="employeeId">Employee ID</label>
+            <input class="form-control" id="employeeId" placeholder="Please Enter Employee ID from 1 to 700">
+            <div class="alert alert-success d-none my-3" role="alert" id="employeeIdValid">
+                ok
+              </div>
+              <div class="alert alert-danger d-none my-3" role="alert" id="employeeIdInvalid">
+                Please Enter Employee ID from 1 to 700
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="employeeName">Employee Name</label>
+            <input class="form-control" id="employeeName" placeholder="Please Enter Employee Quadrant Name">
+            <div class="alert alert-success d-none my-3" role="alert" id="employeeNameValid">
+                ok
+              </div>
+              <div class="alert alert-danger d-none my-3" role="alert" id="employeeNameInvalid">
+                Please Enter Employee Quadrant Name
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="employeeSalary">Employee Salary</label>
+            <input class="form-control" id="employeeSalary" placeholder="Please Enter Employee Salary from 2000 to 5000">
+            <div class="alert alert-success d-none my-3" role="alert" id="employeeSalaryValid">
+                ok
+              </div>
+              <div class="alert alert-danger d-none my-3" role="alert" id="employeeSalaryInvalid">
+                Please Enter Employee Salary from 2000 to 5000
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="employeePosition">Employee Position</label>
+            <input class="form-control" id="employeePosition" placeholder="Please Enter Employee Position 3 to 10 Characters">
+            <div class="alert alert-success d-none my-3" role="alert" id="employeePositionValid">
+                ok
+              </div>
+              <div class="alert alert-danger d-none my-3" role="alert" id="employeePositionInvalid">
+                Please Enter Employee Position 3 to 10 Characters
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="employeeDepartment">Employee Department</label>
+            <input class="form-control" id="employeeDepartment" placeholder="Please Enter Employee Department 3 to 10 only Capital Characters">
+            <div class="alert alert-success d-none my-3" role="alert" id="employeeDepartmentValid">
+                ok
+              </div>
+              <div class="alert alert-danger d-none my-3" role="alert" id="employeeDepartmentInvalid">
+                Please Enter Employee Department 3 to 10 only Capital Characters
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="employeeSearch">Employee Search</label>
+            <input class="form-control w-50" id="employeeSearch" placeholder="Search Employee by Name ......">
+        </div>
+        <div class="form-group">
+            <a><button class="btn btn-info "  id="addBtn" disabled>Add Employee</button></a>
+        </div>
+
+
+    </div>
+    <!--________________ CRUD System Inputs Section End ________________-->
+
+
+    <!--________________ CRUD System Table Section Start ________________-->
+    <div class="crudTable  w-75 m-auto">
+
+        <table class="table table-striped  my-5 ">
+            <thead>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Employee Salary</th>
+                <th>Employee Position</th>
+                <th>Employee Department</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </thead>
+            <tbody id="employeeData">
+
+
+            </tbody>
+        </table>
+    </div>
+    <!--________________ CRUD System Table Section End ________________-->
+
+
+    <!-- External Files -->
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+</body>
+
+</html>
