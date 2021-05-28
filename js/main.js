@@ -1,25 +1,7 @@
 /*_______________________ Variable Decleration Start _______________________*/
 
-var employeeData = document.getElementById('employeeData'),
-    employeeId = document.getElementById('employeeId'),
-    employeeName = document.getElementById('employeeName'),
-    employeeSalary = document.getElementById('employeeSalary'),
-    employeePosition = document.getElementById('employeePosition'),
-    employeeDepartment = document.getElementById('employeeDepartment'),
-    addBtn = document.getElementById('addBtn'),
-    myInputs = document.getElementsByClassName('form-control'),
-    employeeSearch = document.getElementById('employeeSearch'),
-    employeeIdValid = document.getElementById('employeeIdValid'),
-    employeeIdInvalid = document.getElementById('employeeIdInvalid'),
-    employeeNameValid = document.getElementById('employeeNameValid'),
-    employeeNameInvalid = document.getElementById('employeeNameInvalid'),
-    employeeSalaryValid = document.getElementById('employeeSalaryValid'),
-    employeeSalaryInvalid = document.getElementById('employeeSalaryInvalid'),
-    employeePositionValid = document.getElementById('employeePositionValid'),
-    employeePositionInvalid = document.getElementById('employeePositionInvalid'),
-    employeeDepartmentValid = document.getElementById('employeeDepartmentValid'),
-    employeeDepartmentInvalid = document.getElementById('employeeDepartmentInvalid'),
-    myAlerts = document.getElementsByClassName('alert');
+
+
 
 
 var employees = [];
@@ -38,7 +20,7 @@ if (JSON.parse(localStorage.getItem("employeeLists")) != null) {
 
 
 /*_________________ When Click addBtn  Start _________________*/
-addBtn.addEventListener('click', function () {
+$('#addBtn').click(function () {
     if (addBtn.innerHTML == 'Update') {
         updateEmployee();
 
@@ -52,6 +34,7 @@ addBtn.addEventListener('click', function () {
 
     }
 })
+
 /*_________________ When Click addBtn  End _________________*/
 
 
@@ -64,11 +47,11 @@ function addEmployee() {
 
     var employee =
     {
-        employee_Id: employeeId.value,
-        employee_Name: employeeName.value,
-        employee_Salary: employeeSalary.value,
-        employee_Position: employeePosition.value,
-        employee_Department: employeeDepartment.value,
+        employee_Id: $('#employeeId').val(),
+        employee_Name: $('#employeeName').val(),
+        employee_Salary: $('#employeeSalary').val(),
+        employee_Position: $('#employeePosition').val(),
+        employee_Department: $('#employeeDepartment').val(),
 
     }
     employees.push(employee);
@@ -95,8 +78,8 @@ function displayEmployee() {
         <td>${employees[i].employee_Salary}</td>
         <td>${employees[i].employee_Position}</td>
         <td>${employees[i].employee_Department}</td>
-        <td><button class="btn btn-danger" onclick="deleteEmployee(${i})">Delete</button></td>
-        <td><a href="#crud"><button class="btn btn-success" onclick="getEmployeeData(${i})">Update</button></a></td>
+        <td><button class="btn btn-danger" onclick="deleteEmployee(${i})"><i class="far fa-trash-alt"></i></button></td>
+        <td><a href="#crud"><button class="btn btn-success" onclick="getEmployeeData(${i})"><i class="fas fa-edit"></i></button></a></td>
         </tr>
                  `
             ;
@@ -104,7 +87,9 @@ function displayEmployee() {
 
     }
 
-    employeeData.innerHTML = employeeContainer;
+    $('#employeeData').html(employeeContainer);
+    localStorage.setItem("employeeLists", JSON.stringify(employees))
+
 
 }
 /*_________________ displayEmployee function End _________________*/
@@ -113,19 +98,12 @@ function displayEmployee() {
 /*_________________ clearForm function Start _________________*/
 
 function clearForm() {
-    for (var i = 0; i < myInputs.length; i++) {
-        myInputs[i].value = '';
-        myInputs[i].classList.remove('is-valid')
-        myInputs[i].classList.remove('is-invalid')
-    }
-    for (var i = 0; i < myAlerts.length; i++) {
 
-
-        myAlerts[i].classList.add('d-none');
-        myAlerts[i].classList.remove('d-block');
-    }
-
-
+    $('.form-control').val('');
+    $('.form-control').removeClass('is-valid')
+    $('.form-control').removeClass('is-invalid')
+    $('.alert').addClass('d-none')
+    $('.alert').removeClass('d-block')
 
 }
 /*_________________ clearForm function End _________________*/
@@ -135,23 +113,25 @@ function clearForm() {
 /*_________________ getEmployeeData function Start _________________*/
 function getEmployeeData(index) {
     alert('Updating Engineer ' + employees[index].employee_Name + ' Data at' + ' Row ' + (index + 1));
-    employeeId.value = employees[index].employee_Id;
-    employeeName.value = employees[index].employee_Name;
-    employeeSalary.value = employees[index].employee_Salary;
-    employeePosition.value = employees[index].employee_Position;
-    employeeDepartment.value = employees[index].employee_Department;
+    $('#employeeId').val(employees[index].employee_Id);
+    $('#employeeName').val(employees[index].employee_Name);
+    $('#employeeSalary').val(employees[index].employee_Salary);
+    $('#employeePosition').val(employees[index].employee_Position);
+    $('#employeeDepartment').val(employees[index].employee_Department);
+
     localStorage.setItem("employeeLists", JSON.stringify(employees))
 
     currentIndex = index;
 
-    addBtn.innerHTML = 'Update';
+    $('#addBtn').text('Update');
 
 }
 /*_________________ getEmployeeData function End _________________*/
 
 /*_________________ deleteEmployee function Start _________________*/
 function deleteEmployee(index) {
-    alert('Deleting Engineer ' + employees[index].employee_Name + ' Data at' + ' Row ' + (index + 1)); employees.splice(index, 1);
+    alert('Deleting Engineer ' + employees[index].employee_Name + ' Data at' + ' Row ' + (index + 1));
+    employees.splice(index, 1);
     displayEmployee();
     localStorage.setItem("employeeLists", JSON.stringify(employees))
 
@@ -177,102 +157,105 @@ function updateEmployee() {
     localStorage.setItem("employeeLists", JSON.stringify(employees))
     displayEmployee();
     clearForm();
-    addBtn.innerHTML = 'Add Employee'
+    $('#addBtn').text('Add Employee');
 }
 /*_________________ updateEmployee function End _________________*/
 
 
 /*_________________ When employeeSearch keyup Start _________________*/
-employeeSearch.addEventListener('keyup', searchByName);
-/*_________________ When employeeSearch keyup End _________________*/
-
-
-/*_________________ searchByName function Start _________________*/
-function searchByName() {
+$('#employeeSearch').keyup(function () {
     var employeeContainer = '';
     for (var i = 0; i < employees.length; i++) {
-        if (employees[i].employee_Name.toUpperCase().includes(employeeSearch.value.toUpperCase())) {
+        if (employees[i].employee_Name.toLowerCase().includes(this.value.toLowerCase())) {
             employeeContainer +=
                 `
         <tr>
-        <td id='id-${i}'>${employees[i].employee_Id}</td>
+        <td>${employees[i].employee_Id}</td>
         <td>${employees[i].employee_Name}</td>
         <td>${employees[i].employee_Salary}</td>
         <td>${employees[i].employee_Position}</td>
         <td>${employees[i].employee_Department}</td>
-        <td><button class="btn btn-danger" onclick="deleteEmployee(${i})">Delete</button></td>
-        <td><a href="#crud"><button class="btn btn-success" onclick="getEmployeeData(${i})">Update</button></a></td>
+        <td><button class="btn btn-danger" onclick="deleteEmployee(${i})"><i class="far fa-trash-alt"></i></button></td>
+        <td><a href="#crud"><button class="btn btn-success" onclick="getEmployeeData(${i})"><i class="fas fa-edit"></i></button></a></td>
         </tr>
                  `
                 ;
 
-        }
-        employeeData.innerHTML = employeeContainer;
 
-        localStorage.setItem("employeeLists", JSON.stringify(employees))
+        }
 
 
     }
-}
+    $('#employeeData').html(employeeContainer);
+
+})
+/*_________________ When employeeSearch keyup End _________________*/
+
+
+/*_________________ searchByName function Start _________________*/
+
 /*_________________ searchByName function End _________________*/
 
 /*________________________________ Input Validation Start ________________________________*/
 /*____________ Employee ID Validation Start ____________*/
 function checkId() {
     var employeeIdValidationRej = /^(([0-6]?[0-9]?[0-9])|(700))$/
-    var res = employeeIdValidationRej.test(employeeId.value)
+    var res = employeeIdValidationRej.test($('#employeeId').val())
     return res;
 }
 function checkName() {
     var employeeNameValidationRej = /^[A-z]{3,8} [A-z]{3,8} [A-z]{3,8} [A-z]{3,8}$/
-    var res = employeeNameValidationRej.test(employeeName.value)
+    var res = employeeNameValidationRej.test($('#employeeName').val())
     return res;
 }
 function checkSalary() {
     var employeeSalaryValidationRej = /^(([2-4][0-9][0-9][0-9])|(5000))$/
-    var res = employeeSalaryValidationRej.test(employeeSalary.value)
+    var res = employeeSalaryValidationRej.test($('#employeeSalary').val())
     return res;
 }
 function checkPosition() {
     var employeePositionValidationRej = /^[A-z]{3,10}$/
-    var res = employeePositionValidationRej.test(employeePosition.value)
+    var res = employeePositionValidationRej.test($('#employeePosition').val())
     return res;
 }
 function checkDepartment() {
     var employeeDepartmentValidationRej = /^[A-Z]{2,10}$/
-    var res = employeeDepartmentValidationRej.test(employeeDepartment.value)
+    var res = employeeDepartmentValidationRej.test($('#employeeDepartment').val())
     return res;
 }
 employeeId.addEventListener('keyup', employeeIdValidation);
 
 function employeeIdValidation() {
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
-        addBtn.removeAttribute('disabled')
+        $('#addBtn').removeAttr('disabled')
+    }
+
+    else {
+        $('#addBtn').attr('disabled', 'true')
+    }
+    if (checkId()) {
+        $('#employeeId').addClass('is-valid');
+        $('#employeeId').removeClass('is-invalid');
+        $('#employeeIdValid').removeClass('d-none');
+        $('#employeeIdInvalid').removeClass('d-block');
+
     }
     else {
-        addBtn.setAttribute('disabled', 'true')
-    }
+        $('#employeeId').addClass('is-invalid');
+        $('#employeeId').removeClass('is-valid');
+        $('#employeeIdInvalid').addClass('d-block');
+        $('#employeeIdValid').addClass('d-none');
 
-    if (checkId() == true) {
-        employeeId.classList.add('is-valid')
-        employeeId.classList.remove('is-invalid')
-        employeeIdValid.classList.remove('d-none');
-        employeeIdInvalid.classList.remove('d-block');;
 
     }
-    else {
-        employeeId.classList.remove('is-valid')
-        employeeId.classList.add('is-invalid')
+    if ($('#employeeId').val() == '') {
+        $('#employeeId').removeClass('is-valid');
+        $('#employeeId').removeClass('is-invalid');
+        $('#employeeIdInvalid').removeClass('d-block');
 
-        employeeIdInvalid.classList.add('d-block');
-        employeeIdValid.classList.add('d-none');;
+        $('#employeeIdvalid').removeClass('d-block');
 
-    }
-    if (employeeId.value == '') {
-        employeeId.classList.remove('is-valid')
-        employeeId.classList.remove('is-invalid')
-        employeeIdInvalid.classList.remove('d-block');
-        employeeIdInvalid.classList.remove('d-block');
+
 
     }
 
@@ -289,33 +272,36 @@ employeeName.addEventListener('keyup', employeeNameValidation);
 
 function employeeNameValidation() {
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
-        addBtn.removeAttribute('disabled')
+        $('#addBtn').removeAttr('disabled')
     }
+
     else {
-        addBtn.setAttribute('disabled', 'true')
+        $('#addBtn').attr('disabled', 'true')
     }
     if (checkName()) {
-        employeeName.classList.add('is-valid')
-        employeeName.classList.remove('is-invalid')
-        employeeNameValid.classList.remove('d-none');
-        employeeNameInvalid.classList.remove('d-block');;
+        $('#employeeName').addClass('is-valid');
+        $('#employeeName').removeClass('is-invalid');
+        $('#employeeNameValid').removeClass('d-none');
+        $('#employeeNameInvalid').removeClass('d-block');
 
     }
     else {
-        employeeName.classList.remove('is-valid')
-        employeeName.classList.add('is-invalid')
-        employeeNameInvalid.classList.add('d-block');
-        employeeNameValid.classList.add('d-none');;
+        $('#employeeName').addClass('is-invalid');
+        $('#employeeName').removeClass('is-valid');
+        $('#employeeNameInvalid').addClass('d-block');
+        $('#employeeNameValid').addClass('d-none');
 
 
     }
-    if (employeeName.value == '') {
-        employeeName.classList.remove('is-valid')
-        employeeName.classList.remove('is-invalid')
+    if ($('#employeeName').val() == '') {
+        $('#employeeName').removeClass('is-valid');
+        $('#employeeName').removeClass('is-invalid');
+        $('#employeeNameInvalid').removeClass('d-block');
+
+        $('#employeeNamevalid').removeClass('d-block');
 
 
-        employeeNameInvalid.classList.remove('d-block');
-        employeeNameInvalid.classList.remove('d-block');
+
     }
 
 }
@@ -328,40 +314,38 @@ employeeSalary.addEventListener('keyup', employeeSalaryValidation);
 
 function employeeSalaryValidation() {
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
-        addBtn.removeAttribute('disabled')
+        $('#addBtn').removeAttr('disabled')
     }
     else {
-        addBtn.setAttribute('disabled', 'true')
+        $('#addBtn').attr('disabled', 'true')
     }
+
     if (checkSalary()) {
-        employeeSalary.classList.add('is-valid')
-        employeeSalary.classList.remove('is-invalid')
-        employeeSalaryValid.classList.remove('d-none');
-        employeeSalaryInvalid.classList.remove('d-block');;
-
-
-
+        $('#employeeSalary').addClass('is-valid');
+        $('#employeeSalary').removeClass('is-invalid');
+        $('#employeeSalaryValid').removeClass('d-none');
+        $('#employeeSalaryInvalid').removeClass('d-block');
 
     }
     else {
-        employeeSalary.classList.remove('is-valid')
-        employeeSalary.classList.add('is-invalid')
+        $('#employeeSalary').addClass('is-invalid');
+        $('#employeeSalary').removeClass('is-valid');
+        $('#employeeSalaryInvalid').addClass('d-block');
+        $('#employeeSalaryValid').addClass('d-none');
 
-
-        employeeSalaryInvalid.classList.add('d-block');
-        employeeSalaryValid.classList.add('d-none');;
 
     }
-    if (employeeSalary.value == '') {
-        employeeSalary.classList.remove('is-valid')
-        employeeSalary.classList.remove('is-invalid')
+    if ($('#employeeSalary').val() == '') {
+        $('#employeeSalary').removeClass('is-valid');
+        $('#employeeSalary').removeClass('is-invalid');
+        $('#employeeSalaryInvalid').removeClass('d-block');
+
+        $('#employeeSalaryvalid').removeClass('d-block');
 
 
-
-        employeeSalaryInvalid.classList.remove('d-block');
-        employeeSalaryInvalid.classList.remove('d-block');
 
     }
+
 
 }
 
@@ -373,40 +357,38 @@ employeePosition.addEventListener('keyup', employeePositionValidation);
 
 function employeePositionValidation() {
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
-        addBtn.removeAttribute('disabled')
+        $('#addBtn').removeAttr('disabled')
     }
     else {
-        addBtn.setAttribute('disabled', 'true')
+        $('#addBtn').attr('disabled', 'true')
     }
+
+
     if (checkPosition()) {
-        employeePosition.classList.add('is-valid')
-        employeePosition.classList.remove('is-invalid')
-        employeePositionValid.classList.remove('d-none');
-        employeePositionInvalid.classList.remove('d-block');;
-
-
-
+        $('#employeePosition').addClass('is-valid');
+        $('#employeePosition').removeClass('is-invalid');
+        $('#employeePositionValid').removeClass('d-none');
+        $('#employeePositionInvalid').removeClass('d-block');
 
     }
     else {
-        employeePosition.classList.remove('is-valid')
-        employeePosition.classList.add('is-invalid')
-
-
-        employeePositionInvalid.classList.add('d-block');
-        employeePositionValid.classList.add('d-none');;
-
-
-    }
-    if (employeePosition.value == '') {
-        employeePosition.classList.remove('is-valid')
-        employeePosition.classList.remove('is-invalid')
-        employeePositionInvalid.classList.remove('d-block');
-        employeePositionInvalid.classList.remove('d-block');
+        $('#employeePosition').addClass('is-invalid');
+        $('#employeePosition').removeClass('is-valid');
+        $('#employeePositionInvalid').addClass('d-block');
+        $('#employeePositionValid').addClass('d-none');
 
 
     }
+    if ($('#employeePosition').val() == '') {
+        $('#employeePosition').removeClass('is-valid');
+        $('#employeePosition').removeClass('is-invalid');
+        $('#employeePositionInvalid').removeClass('d-block');
 
+        $('#employeePositionvalid').removeClass('d-block');
+
+
+
+    }
 }
 
 /*____________ Employee Position Validation End ____________*/
@@ -416,44 +398,40 @@ employeeDepartment.addEventListener('keyup', employeeDepartmentValidation);
 
 function employeeDepartmentValidation() {
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
-        addBtn.removeAttribute('disabled')
+        $('#addBtn').removeAttr('disabled')
     }
     else {
-        addBtn.setAttribute('disabled', 'true')
+        $('#addBtn').attr('disabled', 'true')
     }
+
 
     if (checkDepartment()) {
-        employeeDepartment.classList.add('is-valid')
-        employeeDepartment.classList.remove('is-invalid')
-
-        employeeDepartmentValid.classList.remove('d-none');
-        employeeDepartmentInvalid.classList.remove('d-block');;
-
+        $('#employeeDepartment').addClass('is-valid');
+        $('#employeeDepartment').removeClass('is-invalid');
+        $('#employeeDepartmentValid').removeClass('d-none');
+        $('#employeeDepartmentInvalid').removeClass('d-block');
 
     }
-
     else {
-        employeeDepartment.classList.remove('is-valid')
-        employeeDepartment.classList.add('is-invalid')
+        $('#employeeDepartment').addClass('is-invalid');
+        $('#employeeDepartment').removeClass('is-valid');
+        $('#employeeDepartmentInvalid').addClass('d-block');
+        $('#employeeDepartmentValid').addClass('d-none');
 
-        employeeDepartmentInvalid.classList.add('d-block');
-        employeeDepartmentValid.classList.add('d-none');;
-
-
-        addBtn.setAttribute('disabled', 'true')
 
     }
-    if (employeeDepartment.value == '') {
-        employeeDepartment.classList.remove('is-valid')
-        employeeDepartment.classList.remove('is-invalid')
+    if ($('#employeeDepartment').val() == '') {
+        $('#employeeDepartment').removeClass('is-valid');
+        $('#employeeDepartment').removeClass('is-invalid');
+        $('#employeeDepartmentInvalid').removeClass('d-block');
 
-        addBtn.setAttribute('disabled', 'true')
+        $('#employeeDepartmentvalid').removeClass('d-block');
 
-        employeeDepartmentInvalid.classList.remove('d-block');
-        employeeDepartmentInvalid.classList.remove('d-block');
+
+
     }
-
 }
+
 /*____________ Employee Department Validation End ____________*/
 
 
