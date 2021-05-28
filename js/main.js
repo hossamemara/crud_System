@@ -112,7 +112,7 @@ function clearForm() {
 
 /*_________________ getEmployeeData function Start _________________*/
 function getEmployeeData(index) {
-    alert('Updating Engineer ' + employees[index].employee_Name + ' Data at' + ' Row ' + (index + 1));
+    alert('Updating Employee ' + employees[index].employee_Name + ' Data at' + ' Row ' + (index + 1));
     $('#employeeId').val(employees[index].employee_Id);
     $('#employeeName').val(employees[index].employee_Name);
     $('#employeeSalary').val(employees[index].employee_Salary);
