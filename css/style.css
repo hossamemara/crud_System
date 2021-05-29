@@ -90,3 +90,25 @@ html{scroll-behavior: smooth;
 body{
  background-color: rgb(228, 227, 227);
 }
+
+.update-employee-view
+{
+   margin: auto;
+    padding: 20px;
+    background-color: skyblue;
+    width: 50%;
+}
+
+.update-view
+{
+    top: 0px;
+    left: 0px;
+    right:0px;
+    bottom: 0px;
+    padding: 0px;
+    background-color: rgb(225, 231, 233);
+}
+#exampleModal
+{
+    background-color: rgba(192, 192, 192) !important;
+}

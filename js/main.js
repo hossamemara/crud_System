@@ -146,11 +146,11 @@ function updateEmployee() {
 
     var employee =
     {
-        employee_Id: employeeId.value,
-        employee_Name: employeeName.value,
-        employee_Salary: employeeSalary.value,
-        employee_Position: employeePosition.value,
-        employee_Department: employeeDepartment.value,
+        employee_Id: $('#employeeId').val(),
+        employee_Name: $('#employeeName').val(),
+        employee_Salary: $('#employeeSalary').val(),
+        employee_Position: $('#employeePosition').val(),
+        employee_Department: $('#employeeDepartment').val(),
     }
 
     employees[currentIndex] = employee;
