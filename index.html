@@ -17,54 +17,54 @@
 <body>
     <!--________________ CRUD System Inputs Section Start ________________-->
     <div class="crudInputs w-60 m-auto" id="crud">
-        <h1 class="text-center text-danger  my-3">CRUD System</h1>
+        <h1 class="text-center text-danger  my-2">CRUD System</h1>
         <div class="form-group">
             <label for="employeeId">Employee ID</label>
             <input class="form-control" id="employeeId" placeholder="Please Enter Employee ID from 1 to 700">
-            <div class="alert alert-success d-none my-2" role="alert" id="employeeIdValid">
+            <div class="alert alert-success d-none my-1" role="alert" id="employeeIdValid">
                 ok
               </div>
-              <div class="alert alert-danger d-none my-2" role="alert" id="employeeIdInvalid">
+              <div class="alert alert-danger d-none my-1" role="alert" id="employeeIdInvalid">
                 Please Enter Employee ID from 1 to 700
               </div>
         </div>
         <div class="form-group">
             <label for="employeeName">Employee Name</label>
             <input class="form-control" id="employeeName" placeholder="Please Enter Employee Quadrant Name">
-            <div class="alert alert-success d-none my-2" role="alert" id="employeeNameValid">
+            <div class="alert alert-success d-none my-1" role="alert" id="employeeNameValid">
                 ok
               </div>
-              <div class="alert alert-danger d-none my-2" role="alert" id="employeeNameInvalid">
+              <div class="alert alert-danger d-none my-1" role="alert" id="employeeNameInvalid">
                 Please Enter Employee Quadrant Name
               </div>
         </div>
         <div class="form-group">
             <label for="employeeSalary">Employee Salary</label>
             <input class="form-control" id="employeeSalary" placeholder="Please Enter Employee Salary from 2000 to 5000">
-            <div class="alert alert-success d-none my-2" role="alert" id="employeeSalaryValid">
+            <div class="alert alert-success d-none my-1" role="alert" id="employeeSalaryValid">
                 ok
               </div>
-              <div class="alert alert-danger d-none my-2" role="alert" id="employeeSalaryInvalid">
+              <div class="alert alert-danger d-none my-1" role="alert" id="employeeSalaryInvalid">
                 Please Enter Employee Salary from 2000 to 5000
               </div>
         </div>
         <div class="form-group">
             <label for="employeePosition">Employee Position</label>
             <input class="form-control" id="employeePosition" placeholder="Please Enter Employee Position 3 to 10 Characters">
-            <div class="alert alert-success d-none my-2" role="alert" id="employeePositionValid">
+            <div class="alert alert-success d-none my-1" role="alert" id="employeePositionValid">
                 ok
               </div>
-              <div class="alert alert-danger d-none my-2" role="alert" id="employeePositionInvalid">
+              <div class="alert alert-danger d-none my-1" role="alert" id="employeePositionInvalid">
                 Please Enter Employee Position 3 to 10 Characters
               </div>
         </div>
         <div class="form-group">
             <label for="employeeDepartment">Employee Department</label>
             <input class="form-control" id="employeeDepartment" placeholder="Please Enter Employee Department 3 to 10 only Capital Characters">
-            <div class="alert alert-success d-none my-2" role="alert" id="employeeDepartmentValid">
+            <div class="alert alert-success d-none my-1" role="alert" id="employeeDepartmentValid">
                 ok
               </div>
-              <div class="alert alert-danger d-none my-2" role="alert" id="employeeDepartmentInvalid">
+              <div class="alert alert-danger d-none my-1" role="alert" id="employeeDepartmentInvalid">
                 Please Enter Employee Department 3 to 10 only Capital Characters
               </div>
         </div>
@@ -72,8 +72,10 @@
             <label for="employeeSearch">Employee Search</label>
             <input class="form-control" id="employeeSearch" placeholder="Search Employee by Name ......">
         </div>
-        <div class="form-group my-2">
+        <div class="form-group my-1 w-60">
             <a><button class="btn btn-outline-primary "  id="addBtn" disabled>Add Employee</button></a>
+            <button class="btn btn-outline-danger" id="clear-local-storage">Clear Storage</button>
+
         </div>
 
 

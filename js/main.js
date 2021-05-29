@@ -189,6 +189,32 @@ $('#employeeSearch').keyup(function () {
     $('#employeeData').html(employeeContainer);
 
 })
+
+
+// Clear Local Storage 
+
+$('#clear-local-storage').click(function () {
+    if (JSON.parse(localStorage.getItem('employeeLists')) == '' || JSON.parse(localStorage.getItem('employeeLists')) == null) {
+        alert('Local Storage is already empty')
+        clearForm();
+
+    }
+
+    else {
+        clearStorage()
+        clearForm();
+    }
+
+
+})
+var employees = [];
+function clearStorage() {
+    localStorage.clear();
+    employees = []
+    displayEmployee();
+    alert('Local Storage Has Successfully Cleared')
+
+}
 /*_________________ When employeeSearch keyup End _________________*/
 
 
