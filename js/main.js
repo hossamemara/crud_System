@@ -21,11 +21,11 @@ if (JSON.parse(localStorage.getItem("employeeLists")) != null) {
 
 /*_________________ When Click addBtn  Start _________________*/
 $('#addBtn').click(function () {
-    if (addBtn.innerHTML == 'Update') {
+    if ($('#addBtn').html() == '<i class="fas fa-edit"></i> Update') {
         updateEmployee();
 
     }
-    else if (addBtn.innerHTML == 'Add Employee') {
+    else if ($('#addBtn').html() == '<i class="fas fa-plus"></i> Add Employee ') {
 
 
         addEmployee();
@@ -51,7 +51,7 @@ function addEmployee() {
         employee_Name: $('#employeeName').val(),
         employee_Salary: $('#employeeSalary').val(),
         employee_Position: $('#employeePosition').val(),
-        employee_Department: $('#employeeDepartment').val(),
+        employee_Department: $('#employeeDepartment').val()
 
     }
     employees.push(employee);
@@ -123,7 +123,7 @@ function getEmployeeData(index) {
 
     currentIndex = index;
 
-    $('#addBtn').text('Update');
+    $('#addBtn').html('<i class="fas fa-edit"></i> Update');
 
 }
 /*_________________ getEmployeeData function End _________________*/
@@ -157,7 +157,7 @@ function updateEmployee() {
     localStorage.setItem("employeeLists", JSON.stringify(employees))
     displayEmployee();
     clearForm();
-    $('#addBtn').text('Add Employee');
+    $('#addBtn').html('<i class="fas fa-plus"></i> Add Employee </button>');
 }
 /*_________________ updateEmployee function End _________________*/
 
@@ -207,7 +207,7 @@ $('#clear-local-storage').click(function () {
 
 
 })
-var employees = [];
+
 function clearStorage() {
     localStorage.clear();
     employees = []
@@ -249,9 +249,7 @@ function checkDepartment() {
     var res = employeeDepartmentValidationRej.test($('#employeeDepartment').val())
     return res;
 }
-employeeId.addEventListener('keyup', employeeIdValidation);
-
-function employeeIdValidation() {
+$('#employeeId').keyup(function(){
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
         $('#addBtn').removeAttr('disabled')
     }
@@ -283,10 +281,9 @@ function employeeIdValidation() {
 
 
 
-    }
+    }});
 
 
-}
 
 
 /*____________ Employee ID Validation End ____________*/
@@ -294,9 +291,7 @@ function employeeIdValidation() {
 
 
 /*____________ Employee Name Validation Start ____________*/
-employeeName.addEventListener('keyup', employeeNameValidation);
-
-function employeeNameValidation() {
+$('#employeeName').keyup(function(){
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
         $('#addBtn').removeAttr('disabled')
     }
@@ -329,16 +324,15 @@ function employeeNameValidation() {
 
 
     }
+} );
 
-}
+
 
 /*____________ Employee Name Validation End ____________*/
 
 
 /*____________ Employee Salary Validation Start ____________*/
-employeeSalary.addEventListener('keyup', employeeSalaryValidation);
-
-function employeeSalaryValidation() {
+$('#employeeSalary').keyup(function(){
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
         $('#addBtn').removeAttr('disabled')
     }
@@ -372,16 +366,16 @@ function employeeSalaryValidation() {
 
     }
 
+} );
 
-}
+
+
 
 /*____________ Employee Salary Validation End ____________*/
 
 
 /*____________ Employee Position Validation Start ____________*/
-employeePosition.addEventListener('keyup', employeePositionValidation);
-
-function employeePositionValidation() {
+$('#employeePosition').keyup(function(){
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
         $('#addBtn').removeAttr('disabled')
     }
@@ -415,14 +409,15 @@ function employeePositionValidation() {
 
 
     }
-}
+} );
+
+
 
 /*____________ Employee Position Validation End ____________*/
 
 /*____________ Employee Department Validation Start ____________*/
-employeeDepartment.addEventListener('keyup', employeeDepartmentValidation);
 
-function employeeDepartmentValidation() {
+$('#employeeDepartment').keyup(function(){
     if (checkId() && checkName() && checkDepartment() && checkPosition() && checkSalary()) {
         $('#addBtn').removeAttr('disabled')
     }
@@ -456,7 +451,9 @@ function employeeDepartmentValidation() {
 
 
     }
-}
+} );
+
+
 
 /*____________ Employee Department Validation End ____________*/
 

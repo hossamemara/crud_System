@@ -117,7 +117,12 @@ body{
     float: left !important;
 }
 
-
+.alert
+{
+    margin: 3px 0px;
+    
+    
+}
 @media only screen and (max-width: 500px) {
   .crudInputs,.crudTable
   {
