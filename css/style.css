@@ -103,13 +103,6 @@ body{
     
     
 }
-@media only screen and (max-width: 500px) {
-  .crudInputs,.crudTable
-  {
-      width: 95%;
-  }
-  }
-
 .alert-add-employee
 {
     position: fixed;
@@ -119,6 +112,18 @@ body{
     right: 10px;
     
 }
+@media only screen and (max-width: 500px) {
+  .crudInputs,.crudTable
+  {
+      width: 95%;
+  }
+  .alert-add-employee
+  {
+    width: 95%;
+  }
+  }
+
+
 
 
 
