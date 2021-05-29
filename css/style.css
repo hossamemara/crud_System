@@ -112,3 +112,10 @@ body{
 {
     background-color: rgba(192, 192, 192) !important;
 }
+
+@media only screen and (max-width: 500px) {
+  .crudInputs,.crudTable
+  {
+      width: 95%;
+  }
+  }
