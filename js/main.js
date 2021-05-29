@@ -262,7 +262,11 @@ $('#employeeSearch').keyup(function () {
 
 $('#clear-local-storage').click(function () {
     if (JSON.parse(localStorage.getItem('employeeLists')) == '' || JSON.parse(localStorage.getItem('employeeLists')) == null) {
-        alert('Local Storage is already empty')
+        //alert('Local Storage is already empty')
+        $('.alert-add-employee').css("background-color","red")
+    
+        $('.alerts-info').html(`Local Storage is already empty`)
+        alertsInfoDisplay()
         clearForm();
 
     }
