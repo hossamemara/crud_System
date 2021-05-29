@@ -15,56 +15,55 @@
 </head>
 
 <body>
+
+  <div class="alert alert-add-employee alert-dismissible" role="alert">
+    <strong class="alerts-info"></strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="clearfix"></div>
+  </div>
+
     <!--________________ CRUD System Inputs Section Start ________________-->
     <div class="crudInputs w-60 m-auto" id="crud">
         <h1 class="text-center text-info  my-2">Employee CRUD System</h1>
         <div class="form-group my-1">
             <label class="font-weight-bold text-primary" for="employeeId">Employee ID</label>
             <input class="form-control" id="employeeId" placeholder="Please Enter Employee ID from 1 to 700">
-            <div class="alert alert-success d-none" role="alert" id="employeeIdValid">
-                Ok Your ID is Valid
-              </div>
-              <div class="alert alert-danger d-none" role="alert" id="employeeIdInvalid">
+        
+              <div class="alert alert-validation alert-danger d-none" role="alert" id="employeeIdInvalid">
                 Please Enter Employee ID from 1 to 700
               </div>
         </div>
         <div class="form-group my-1">
             <label class="font-weight-bold text-primary" for="employeeName">Employee Name</label>
             <input class="form-control" id="employeeName" placeholder="Please Enter Employee Quadrant Name">
-            <div class="alert alert-success d-none" role="alert" id="employeeNameValid">
-                Ok Your Name is Valid
-              </div>
-              <div class="alert alert-danger d-none" role="alert" id="employeeNameInvalid">
+         
+              <div class="alert alert-validation alert-danger d-none" role="alert" id="employeeNameInvalid">
                 Please Enter Employee Quadrant Name
               </div>
         </div>
         <div class="form-group my-1">
             <label class="font-weight-bold text-primary" for="employeeSalary">Employee Salary</label>
             <input class="form-control" id="employeeSalary" placeholder="Please Enter Employee Salary from 2000 to 5000">
-            <div class="alert alert-success d-none" role="alert" id="employeeSalaryValid">
-                Ok Your Salary is Valid
-              </div>
-              <div class="alert alert-danger d-none" role="alert" id="employeeSalaryInvalid">
+         
+              <div class="alert alert-validation alert-danger d-none" role="alert" id="employeeSalaryInvalid">
                 Please Enter Employee Salary from 2000 to 5000
               </div>
         </div>
         <div class="form-group my-1">
             <label class="font-weight-bold text-primary" for="employeePosition">Employee Position</label>
             <input class="form-control" id="employeePosition" placeholder="Please Enter Employee Position 3 to 10 Characters">
-            <div class="alert alert-success d-none" role="alert" id="employeePositionValid">
-                Ok Your Position is Valid
-              </div>
-              <div class="alert alert-danger d-none" role="alert" id="employeePositionInvalid">
+         
+              <div class="alert alert-validation alert-danger d-none" role="alert" id="employeePositionInvalid">
                 Please Enter Employee Position 3 to 10 Characters
               </div>
         </div>
         <div class="form-group my-1">
             <label class="font-weight-bold text-primary" for="employeeDepartment">Employee Department</label>
             <input class="form-control" id="employeeDepartment" placeholder="Please Enter Employee Department 3 to 10 only Capital Characters">
-            <div class="alert alert-success d-none" role="alert" id="employeeDepartmentValid">
-                Ok Your Department is Valid
-              </div>
-              <div class="alert alert-danger d-none" role="alert" id="employeeDepartmentInvalid">
+        
+              <div class="alert alert-validation alert-danger d-none" role="alert" id="employeeDepartmentInvalid">
                 Please Enter Employee Department 3 to 10 only Capital Characters
               </div>
         </div>
@@ -82,7 +81,7 @@
 
 
     <!--________________ CRUD System Table Section Start ________________-->
-    <div class="crudTable table-striped table-hover table-responsive">
+    <div class="crudTable table-striped w-90 m-auto table-responsive">
 
         <table class="table table-striped  my-3 ">
             <thead>
@@ -100,6 +99,7 @@
             </tbody>
         </table>
     </div>
+
     <!--________________ CRUD System Table Section End ________________-->
 
 

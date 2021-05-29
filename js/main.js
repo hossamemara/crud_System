@@ -1,9 +1,12 @@
 /*_______________________ Variable Decleration Start _______________________*/
 
-
-
-
-
+function alertsInfoDisplay()
+{
+    $('.alert-add-employee').fadeIn(1000,function()
+    {
+        $('.alert-add-employee').fadeOut(2000)
+    });
+}
 var employees = [];
 var currentIndex;
 
@@ -22,15 +25,19 @@ if (JSON.parse(localStorage.getItem("employeeLists")) != null) {
 /*_________________ When Click addBtn  Start _________________*/
 $('#addBtn').click(function () {
     if ($('#addBtn').html() == '<i class="fas fa-edit"></i> Update') {
+     
         updateEmployee();
 
     }
     else if ($('#addBtn').html() == '<i class="fas fa-plus"></i> Add Employee ') {
 
-
+      
+        
         addEmployee();
+         
         displayEmployee();
         clearForm();
+
 
     }
 })
@@ -38,12 +45,14 @@ $('#addBtn').click(function () {
 /*_________________ When Click addBtn  End _________________*/
 
 
+
+
 /*_________________ addEmployee function Start _________________*/
 
 function addEmployee() {
 
-
-
+    
+    alertsInfoDisplay()
 
     var employee =
     {
@@ -57,6 +66,7 @@ function addEmployee() {
     employees.push(employee);
     localStorage.setItem("employeeLists", JSON.stringify(employees))
     console.log(employees);
+   
 
 
 
@@ -66,6 +76,35 @@ function addEmployee() {
 
 /*_________________ displayEmployee function Start _________________*/
 
+function displayEmployeeAfterDelete() {
+
+    var employeeContainer = '';
+    for (var i = 0; i < employees.length; i++) {
+        employeeContainer +=
+            `
+        <tr>
+        <td>${employees[i].employee_Id}</td>
+        <td>${employees[i].employee_Name}</td>
+        <td>${employees[i].employee_Salary}</td>
+        <td>${employees[i].employee_Position}</td>
+        <td>${employees[i].employee_Department}</td>
+        <td><button class="btn btn-danger" id="delete" onclick="deleteEmployee(${i})"><i class="far fa-trash-alt"></i></button></td>
+        <td><a><button class="btn btn-success" onclick="getEmployeeData(${i})"><i class="fas fa-edit"></i></button></a></td>
+        </tr>
+                 `
+            ;
+      
+     
+
+    }
+    
+    $('#employeeData').html(employeeContainer);
+    localStorage.setItem("employeeLists", JSON.stringify(employees))
+    $('#addBtn').attr('disabled', 'true')
+
+    
+
+}
 function displayEmployee() {
 
     var employeeContainer = '';
@@ -78,18 +117,37 @@ function displayEmployee() {
         <td>${employees[i].employee_Salary}</td>
         <td>${employees[i].employee_Position}</td>
         <td>${employees[i].employee_Department}</td>
-        <td><button class="btn btn-danger" onclick="deleteEmployee(${i})"><i class="far fa-trash-alt"></i></button></td>
-        <td><a href="#crud"><button class="btn btn-success" onclick="getEmployeeData(${i})"><i class="fas fa-edit"></i></button></a></td>
+        <td><button class="btn btn-danger" id="delete" onclick="deleteEmployee(${i})"><i class="far fa-trash-alt"></i></button></td>
+        <td><a><button class="btn btn-success" onclick="getEmployeeData(${i})"><i class="fas fa-edit"></i></button></a></td>
         </tr>
                  `
             ;
+            if ($('#addBtn').html() == '<i class="fas fa-edit"></i> Update') {
+                alertsInfoDisplay()
 
+                 var firstName=employees[i].employee_Name.split(" ");
+                $('.alert-add-employee').css("background-color","#4BB6D3")
+                $('.alerts-info').html(`${firstName[0]+' '+firstName[1]} info has been Successfully Updated `)
+        
+            }
+             if ($('#addBtn').html() == '<i class="fas fa-plus"></i> Add Employee ') {
+        
+              
+                
+                var firstName=employees[i].employee_Name.split(" ");
+                $('.alert-add-employee').css("background-color","green")
+                $('.alerts-info').html(`${firstName[0]+' '+firstName[1]} info has been Successfully added `)
+        
+            }
+     
 
     }
-
+    
     $('#employeeData').html(employeeContainer);
     localStorage.setItem("employeeLists", JSON.stringify(employees))
+    $('#addBtn').attr('disabled', 'true')
 
+    
 
 }
 /*_________________ displayEmployee function End _________________*/
@@ -102,8 +160,8 @@ function clearForm() {
     $('.form-control').val('');
     $('.form-control').removeClass('is-valid')
     $('.form-control').removeClass('is-invalid')
-    $('.alert').addClass('d-none')
-    $('.alert').removeClass('d-block')
+    $('.alert-validation').addClass('d-none')
+    $('.alert-validation').removeClass('d-block')
 
 }
 /*_________________ clearForm function End _________________*/
@@ -112,7 +170,11 @@ function clearForm() {
 
 /*_________________ getEmployeeData function Start _________________*/
 function getEmployeeData(index) {
-    alert('Updating Employee ' + employees[index].employee_Name + ' Data at' + ' Row ' + (index + 1));
+    alertsInfoDisplay()
+    var firstName=employees[index].employee_Name.split(" ");
+    $('.alert-add-employee').css("background-color","#4BB6D3")
+    $('.alerts-info').html(`Updating ${firstName[0]+' '+firstName[1]} info`)
+
     $('#employeeId').val(employees[index].employee_Id);
     $('#employeeName').val(employees[index].employee_Name);
     $('#employeeSalary').val(employees[index].employee_Salary);
@@ -125,17 +187,22 @@ function getEmployeeData(index) {
 
     $('#addBtn').html('<i class="fas fa-edit"></i> Update');
 
+
 }
 /*_________________ getEmployeeData function End _________________*/
 
 /*_________________ deleteEmployee function Start _________________*/
 function deleteEmployee(index) {
-    alert('Deleting Engineer ' + employees[index].employee_Name + ' Data at' + ' Row ' + (index + 1));
+    
+alertsInfoDisplay()
+    var firstName=employees[index].employee_Name.split(" ");
+    $('.alert-add-employee').css("background-color","red")
+    $('.alerts-info').html(`${firstName[0]+' '+firstName[1]} info has been Successfully Deleted`)
     employees.splice(index, 1);
-    displayEmployee();
+    displayEmployeeAfterDelete();
+    
     localStorage.setItem("employeeLists", JSON.stringify(employees))
-
-
+ 
 
 }
 /*_________________ deleteEmployee function End _________________*/
@@ -143,7 +210,7 @@ function deleteEmployee(index) {
 
 /*_________________ updateEmployee function Start _________________*/
 function updateEmployee() {
-
+   
     var employee =
     {
         employee_Id: $('#employeeId').val(),
@@ -212,7 +279,10 @@ function clearStorage() {
     localStorage.clear();
     employees = []
     displayEmployee();
-    alert('Local Storage Has Successfully Cleared')
+    $('.alert-add-employee').css("background-color","red")
+    
+           $('.alerts-info').html(`Local Storage has been Successfully deleted`)
+           alertsInfoDisplay()
 
 }
 /*_________________ When employeeSearch keyup End _________________*/
